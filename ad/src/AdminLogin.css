@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
+/* ─── Variables ─────────────────────────────────────────────── */
+:root {
+  --bg:           #f0f4ff;
+  --surface:      #ffffff;
+  --cyan:         #00d4ff;
+  --violet:       #7c3aed;
+  --violet-light: #a855f7;
+  --pink:         #f72585;
+  --text:         #0f0a2e;
+  --text-muted:   #6b7280;
+  --border:       #e5e7f0;
+  --border-focus: #7c3aed;
+  --error:        #f72585;
+  --radius:       12px;
+  --radius-lg:    20px;
+  --tr:           0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Container ──────────────────────────────────────────────── */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle 600px at 20% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 60%),
+    radial-gradient(circle 500px at 80% 80%, rgba(0, 212, 255, 0.12) 0%, transparent 60%),
+    radial-gradient(circle 400px at 60% 10%, rgba(247, 37, 133, 0.08) 0%, transparent 50%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* floating blobs */
+.login-container::before,
+.login-container::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float 8s ease-in-out infinite;
+}
+
+.login-container::before {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
+  top: -80px;
+  left: -80px;
+}
+
+.login-container::after {
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.15), transparent 70%);
+  bottom: -60px;
+  right: -60px;
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-20px) scale(1.05); }
+}
+
+/* ─── Card ───────────────────────────────────────────────────── */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface);
+  border: 1.5px solid rgba(124, 58, 237, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 48px 44px 44px;
+  position: relative;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.03),
+    0 20px 60px rgba(124, 58, 237, 0.1),
+    0 40px 80px rgba(0, 0, 0, 0.06);
+  animation: cardReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  overflow: hidden;
+}
+
+/* vivid animated top bar */
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--violet), var(--cyan), var(--pink), var(--violet));
+  background-size: 300%;
+  animation: shimmer 3s linear infinite;
+}
+
+.login-card::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.07), transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(28px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ─── Badge ──────────────────────────────────────────────────── */
+.login-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--violet);
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 100px;
+  padding: 4px 12px;
+  margin-bottom: 14px;
+}
+
+/* ─── Title ──────────────────────────────────────────────────── */
+.title {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 32px;
+  animation: fadeUp 0.5s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ─── Form ───────────────────────────────────────────────────── */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ─── Input Group ────────────────────────────────────────────── */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.input-group:nth-child(1) { animation-delay: 0.15s; }
+.input-group:nth-child(2) { animation-delay: 0.22s; }
+
+.input-group label {
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--tr);
+}
+
+.input-group:focus-within label {
+  color: var(--violet);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 13px 16px;
+  background: #f8f7ff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 400;
+  outline: none;
+  transition: border-color var(--tr), background var(--tr), box-shadow var(--tr);
+}
+
+.input-group input::placeholder {
+  color: #c4c5d0;
+}
+
+.input-group input:hover:not(:focus) {
+  border-color: rgba(124, 58, 237, 0.3);
+  background: #fdfcff;
+}
+
+.input-group input:focus {
+  border-color: var(--border-focus);
+  background: #fdfcff;
+  box-shadow:
+    0 0 0 4px rgba(124, 58, 237, 0.1),
+    0 1px 3px rgba(124, 58, 237, 0.06);
+}
+
+/* autofill override */
+.input-group input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 100px #fdfcff inset;
+  -webkit-text-fill-color: var(--text);
+}
+
+/* ─── Error ──────────────────────────────────────────────────── */
+.error {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--error);
+  background: rgba(247, 37, 133, 0.06);
+  border: 1px solid rgba(247, 37, 133, 0.2);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  animation: shake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+/* ─── Button ─────────────────────────────────────────────────── */
+.login-btn {
+  width: 100%;
+  padding: 14px 24px;
+  margin-top: 6px;
+  background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 50%, #c026d3 100%);
+  background-size: 200% auto;
+  border: none;
+  border-radius: var(--radius);
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background-position 0.4s ease, transform var(--tr), box-shadow var(--tr);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
+  animation: fadeUp 0.5s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.login-btn:hover {
+  background-position: right center;
+  box-shadow: 0 6px 30px rgba(124, 58, 237, 0.5), 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.login-btn:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow: 0 3px 12px rgba(124, 58, 237, 0.35);
+}
+
+/* shine sweep */
+.login-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+.login-btn:hover::after {
+  left: 160%;
+}
+
+/* ─── Shared Anim ────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .login-card { padding: 36px 28px 32px; }
+  .title      { font-size: 1.7rem; }
+}
